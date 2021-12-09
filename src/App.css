@@ -1,0 +1,13 @@
+.go-captcha-wrap{
+  position: absolute;
+  top: 450px;
+  left: 50%;
+  margin-left: -150px;
+  width: 300px;
+}
+
+.go-captcha-btn{
+  position: relative;
+  width: 300px !important;
+  margin: 0 auto !important;
+}
