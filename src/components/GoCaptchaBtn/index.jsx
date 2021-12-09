@@ -136,9 +136,9 @@ export default class GoCaptchaBtn extends Component{
     if (prevState.popoverVisible) {
       res['captStatus'] = 'check'
       count++
-      if (prevState.captStatus !== 'check') {
+      // if (prevState.captStatus !== 'check') {
         // nextProps.refresh && nextProps.refresh()
-      }
+      // }
     } else if (prevState.captStatus === 'check') {
       res['captStatus'] = nextProps.value
       count++
