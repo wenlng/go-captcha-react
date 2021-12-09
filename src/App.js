@@ -64,7 +64,6 @@ export default class App extends Component {
         if (Lodash.isEmpty(data)) {
           return
         }
-
         this.setState({
           captBase64: data['image_base64'] || '',
           captThumbBase64:  data['thumb_base64'] || '',

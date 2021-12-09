@@ -137,7 +137,7 @@ export default class GoCaptchaBtn extends Component{
       res['captStatus'] = 'check'
       count++
       if (prevState.captStatus !== 'check') {
-        nextProps.refresh && nextProps.refresh()
+        // nextProps.refresh && nextProps.refresh()
       }
     } else if (prevState.captStatus === 'check') {
       res['captStatus'] = nextProps.value
@@ -188,6 +188,9 @@ export default class GoCaptchaBtn extends Component{
   }
   handleVisibleChange = (visible) => {
     this.setState({popoverVisible: visible})
+    if (visible) {
+      this.props.refresh && this.props.refresh()
+    }
   }
 
   handleBtnEvent = () => {
