@@ -100,6 +100,9 @@ export default class GoCaptcha extends Component{
     }
 
     // ================= Methods ================
+    /**
+     * @Description: 处理关闭事件
+     */
     handleCloseEvent = () => {
         this.props.close && this.props.close()
         this.setState({
@@ -109,6 +112,9 @@ export default class GoCaptcha extends Component{
         });
     }
 
+    /**
+     * @Description: 处理刷新事件
+     */
     handleRefreshEvent = () => {
         this.setState({
             dots: []
@@ -117,6 +123,9 @@ export default class GoCaptcha extends Component{
         this.props.refresh && this.props.refresh()
     }
 
+    /**
+     * @Description: 处理确认事件
+     */
     handleConfirmEvent = () => {
         this.props.confirm && this.props.confirm(this.state.dots || [])
     }
