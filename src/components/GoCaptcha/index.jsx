@@ -163,9 +163,14 @@ export default class GoCaptcha extends Component{
         const xPos = mouseX - domX
         const yPos = mouseY - domY
 
+        // 转整形
+        const xp = parseInt(xPos.toString())
+        const yp = parseInt(yPos.toString())
+
+        // 减去点的一半
         const newDots = [...dots, {
-            x: xPos - 11,
-            y: yPos - 11,
+            x: xp - 11,
+            y: yp - 11,
             index: dots.length + 1
         }]
 
