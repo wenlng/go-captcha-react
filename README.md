@@ -40,7 +40,6 @@ Package captcha implements generation and click location verification of image C
     <br/>
     <br/>   
 </div>
-<br>
 
 ## LICENSE
     MIT
