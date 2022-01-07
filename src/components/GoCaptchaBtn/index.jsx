@@ -53,7 +53,7 @@ export default class GoCaptchaBtn extends Component{
                 <GoCaptcha
                   value={popoverVisible}
                   width="300px"
-                  height="300px"
+                  height="240px"
                   maxDot={5}
                   calcPosType="screen"
                   imageBase64={imageBase64}

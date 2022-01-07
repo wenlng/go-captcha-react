@@ -6,7 +6,7 @@ export default class GoCaptcha extends Component{
     static defaultProps = {
         value: PropTypes.bool.isRequired,
         width: '300px',
-        height: '300px',
+        height: '240px',
         calcPosType: PropTypes.oneOf(['dom', 'screen']),
         maxDot: 5,
         imageBase64: PropTypes.string,
@@ -43,15 +43,19 @@ export default class GoCaptcha extends Component{
             <div className="wg-cap-wrap">
                 <div className="wg-cap-wrap__header">
                     <span>请在下图<em>依次</em>点击：</span>
-                    <img className="wg-cap-wrap__thumb" src={thumbBase64} alt=" "/>
+                    {
+                        thumbBase64 && <img className="wg-cap-wrap__thumb" src={thumbBase64} alt=" "/>
+                    }
                 </div>
                 <div className="wg-cap-wrap__body" style={{
                     width: width,
                     height: height
                 }}>
-                    <img className="wg-cap-wrap__picture"
-                         src={imageBase64} alt=" "
-                         onClick={this.handleClickPos}/>
+                    {
+                        imageBase64 && <img className="wg-cap-wrap__picture"
+                             src={imageBase64} alt=" "
+                             onClick={this.handleClickPos}/>
+                    }
                     <img className="wg-cap-wrap__loading"
                          src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiBzdHlsZT0ibWFyZ2luOiBhdXRvOyBiYWNrZ3JvdW5kOiByZ2JhKDI0MSwgMjQyLCAyNDMsIDApOyBkaXNwbGF5OiBibG9jazsgc2hhcGUtcmVuZGVyaW5nOiBhdXRvOyIgd2lkdGg9IjY0cHgiIGhlaWdodD0iNjRweCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89InhNaWRZTWlkIj4KICA8Y2lyY2xlIGN4PSI1MCIgY3k9IjM2LjgxMDEiIHI9IjEzIiBmaWxsPSIjM2U3Y2ZmIj4KICAgIDxhbmltYXRlIGF0dHJpYnV0ZU5hbWU9ImN5IiBkdXI9IjFzIiByZXBlYXRDb3VudD0iaW5kZWZpbml0ZSIgY2FsY01vZGU9InNwbGluZSIga2V5U3BsaW5lcz0iMC40NSAwIDAuOSAwLjU1OzAgMC40NSAwLjU1IDAuOSIga2V5VGltZXM9IjA7MC41OzEiIHZhbHVlcz0iMjM7Nzc7MjMiPjwvYW5pbWF0ZT4KICA8L2NpcmNsZT4KPC9zdmc+"
                          alt="正在加载中..."/>
