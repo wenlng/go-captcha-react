@@ -5,6 +5,30 @@
   "license": "MIT",
   "private": false,
   "email": "wengaolng@gmail.com",
+  "description": "This is the react package for go-captcha",
+  "keywords": [
+    "go-captcha-react",
+    "go-captcha",
+    "gocaptcha",
+    "captcha-react",
+    "react-captcha",
+    "capts",
+    "gocapts"
+  ],
+  "bugs": {
+    "url": "https://github.com/wenlng/go-captcha-react/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wenlng/go-captcha-react.git"
+  },
+  "module": "dist/go-captcha-react.esm.js",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
   "dependencies": {
     "classnames": "^2.5.1",
     "react": "^18.0.0",
@@ -55,17 +79,6 @@
       "last 1 safari version"
     ]
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/wenlng/go-captcha-react.git"
-  },
-  "module": "dist/go-captcha-react.esm.js",
-  "main": "dist/index.js",
-  "typings": "dist/index.d.ts",
-  "files": [
-    "dist",
-    "src"
-  ],
   "engines": {
     "node": ">=12"
   },
