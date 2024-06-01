@@ -27,7 +27,7 @@
   "typings": "dist/index.d.ts",
   "files": [
     "dist",
-    "src"
+    "packages"
   ],
   "dependencies": {
     "classnames": "^2.5.1",
