@@ -1,0 +1,40 @@
+/**
+ * @Author Awen
+ * @Date 2024/05/25
+ * @Email wengaolng@gmail.com
+ **/
+
+.iconBlock {
+  flex: 1;
+}
+
+.dots{
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  :global {
+    .dot {
+      position: absolute;
+      z-index: 10;
+      width: 20px;
+      height: 20px;
+      color: #cedffe;
+      background: #3e7cff;
+      border: 2px solid #f7f9fb;
+      display:-webkit-box;
+      display:-webkit-flex;
+      display:-ms-flexbox;
+      display:flex;
+      -webkit-box-align:center;
+      -webkit-align-items:center;
+      -ms-flex-align:center;
+      align-items: center;
+      justify-content: center;
+      border-radius: 20px;
+      cursor: default;
+      font-weight: 600;
+    }
+  }
+}
