@@ -24,7 +24,7 @@
     "experimentalDecorators": true,
     "strictNullChecks": true,
 
-    "rootDir": "./packages",
+    "rootDir": "./src",
     "sourceMap": true,
     "importHelpers": true,
     "declaration": true,
@@ -37,11 +37,11 @@
   },
   "paths": {
     "@/*": [
-      "./packages/*"
+      "./src/*"
     ]
   },
   "include": [
-    "packages",
+    "src",
     "types"
   ]
 }

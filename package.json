@@ -26,8 +26,7 @@
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "files": [
-    "dist",
-    "packages"
+    "dist"
   ],
   "dependencies": {
     "classnames": "^2.5.1",

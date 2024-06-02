@@ -11,11 +11,11 @@ import styles from './../../gocaptcha.module.less'
 import CloseIcon from './../../assets/icons/CloseIcon'
 import RefreshIcon from './../../assets/icons/RefreshIcon'
 import LoadingIcon from './../../assets/icons/LoadingIcon'
-import ArrowsIcon from "../../assets/icons/ArrowsIcon";
-import {CaptchaConfig, defaultConfig} from "./meta/config";
-import {useHandler} from "./hooks/useHandler";
+import ArrowsIcon from './../../assets/icons/ArrowsIcon'
 import {CaptchaData} from "./meta/data";
+import {CaptchaConfig, defaultConfig} from "./meta/config";
 import {CaptchaEvent} from "./meta/event";
+import {useHandler} from "./hooks/useHandler";
 
 export interface Props extends React.HTMLAttributes<HTMLElement> {
   data: CaptchaData,
@@ -30,16 +30,18 @@ const Index:FC<Props> = (props: Props) => {
   }
 
   const dragBarRef = useRef<any>(null)
+  const containerRef = useRef<any>(null)
   const dragBlockRef = useRef<any>(null)
+  const tileRef = useRef<any>(null)
 
   const data = props.data || {}
-  const handler = useHandler(data, props.events || {}, dragBlockRef, dragBarRef);
+  const handler = useHandler(data, props.events || {}, containerRef, tileRef, dragBlockRef, dragBarRef);
 
   const hPadding = conf.horizontalPadding || 0
   const vPadding = conf.verticalPadding || 0
   const width = (conf.width || 0) + ( vPadding * 2)
 
-  return <div className={classnames(styles.wrapper, cstyles.wrapper, conf.showTheme && styles.theme)}
+  return <div className={classnames(styles.wrapper, conf.showTheme && styles.theme)}
               style={{
                 width:  width+ "px",
                 paddingLeft: vPadding + "px",
@@ -54,20 +56,13 @@ const Index:FC<Props> = (props: Props) => {
         <RefreshIcon width={22} height={22} onClick={handler.refreshEvent}/>
       </div>
     </div>
-    <div className={classnames(styles.body, cstyles.body)}>
+    <div className={styles.body} ref={containerRef}>
       <div className={styles.loading}>
         <LoadingIcon />
       </div>
-
-      <div className={cstyles.picture} style={{width: conf.size + 'px', height: conf.size + 'px'}}>
-        <img src={data.image} alt="..." />
-        <div className={cstyles.round} />
-      </div>
-
-      <div className={cstyles.thumb}>
-        <div className={cstyles.thumbBlock} style={{ transform: `rotate(${handler.getState().thumbAngle}deg)`}}>
-          <img src={data.thumb} alt="..." />
-        </div>
+      <img className={classnames(styles.picture, data.image == '' && styles.hide)} style={{width: conf.width + "px", height: conf.height + "px"}} src={data.image} alt="..." />
+      <div className={cstyles.tile} ref={tileRef} style={{width: (data.thumbWidth || 0) + 'px', height: (data.thumbHeight || 0) + 'px', top: (data.thumbY || 0) + "px", left: handler.getState().thumbLeft + "px"}}>
+        <img className={data.thumb == '' && styles.hide} src={data.thumb} alt="..."/>
       </div>
     </div>
     <div className={styles.footer}>
