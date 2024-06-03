@@ -35,7 +35,7 @@ const Index:FC<Props> = (props: Props) => {
   const vPadding = conf.verticalPadding || 0
   const width = (conf.width || 0) + ( vPadding * 2)
 
-  return <div className={classnames(styles.wrapper, conf.showTheme && styles.theme)}
+  return <div className={classnames(styles.wrapper, conf.showTheme ? styles.theme : '')}
               style={{
                 width:  width+ "px",
                 paddingLeft: vPadding + "px",
@@ -47,11 +47,11 @@ const Index:FC<Props> = (props: Props) => {
       <span>请在下图<em>依次</em>点击：</span>
       <img className={data.thumb == '' && styles.hide} style={{width: conf.thumbWidth + "px", height: conf.thumbHeight + "px"}} src={data.thumb} alt="..." />
     </div>
-    <div className={styles.body}>
+    <div className={styles.body} style={{width: conf.width + "px", height: conf.height + "px"}}>
       <div className={styles.loading}>
         <LoadingIcon />
       </div>
-      <img className={classnames(styles.picture, data.image == '' && styles.hide)} style={{width: conf.width + "px", height: conf.height + "px"}}  src={data.image} alt="..." onClick={handler.clickEvent}/>
+      <img className={classnames(styles.picture, data.image == '' && styles.hide)} style={{width: conf.width + "px", height: conf.height + "px"}} src={data.image} alt="..." onClick={handler.clickEvent}/>
       <div className={cstyles.dots}>
         {
           handler.getDots().map((dot: CaptchaDot) => {

@@ -42,7 +42,7 @@ const Index:FC<Props> = (props: Props) => {
     tileRef.current.addEventListener('dragstart', (event: any) => event.preventDefault());
   }, [tileRef]);
 
-  return <div className={classnames(styles.wrapper, cstyles.wrapper, conf.showTheme && styles.theme)}
+  return <div className={classnames(styles.wrapper, cstyles.wrapper, conf.showTheme ? styles.theme : '')}
               style={{
                 width:  width+ "px",
                 paddingLeft: vPadding + "px",
@@ -53,11 +53,11 @@ const Index:FC<Props> = (props: Props) => {
     <div className={classnames(styles.header, cstyles.header)}>
       <span>请拖动滑块完成拼图</span>
     </div>
-    <div className={styles.body} ref={containerRef}>
+    <div className={styles.body} ref={containerRef} style={{width: conf.width + "px", height: conf.height + "px"}}>
       <div className={styles.loading}>
         <LoadingIcon />
       </div>
-      <img className={classnames(styles.picture, data.image == '' && styles.hide)} src={data.image} alt="..." />
+      <img className={classnames(styles.picture, data.image == '' && styles.hide)} src={data.image} style={{width: conf.width + "px", height: conf.height + "px"}} alt="..." />
       <div className={cstyles.tile} ref={tileRef} style={{width: (data.thumbWidth || 0) + 'px', height: (data.thumbHeight || 0) + 'px', top: handler.thumbPoint.y + "px", left: handler.thumbPoint.x + "px"}} onMouseDown={handler.dragEvent} onTouchStart={handler.dragEvent} >
         <img className={data.thumb == '' && styles.hide} src={data.thumb} alt="..."/>
       </div>

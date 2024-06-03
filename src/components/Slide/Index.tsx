@@ -41,7 +41,7 @@ const Index:FC<Props> = (props: Props) => {
   const vPadding = conf.verticalPadding || 0
   const width = (conf.width || 0) + ( vPadding * 2)
 
-  return <div className={classnames(styles.wrapper, conf.showTheme && styles.theme)}
+  return <div className={classnames(styles.wrapper, conf.showTheme ? styles.theme : '')}
               style={{
                 width:  width+ "px",
                 paddingLeft: vPadding + "px",
@@ -56,7 +56,7 @@ const Index:FC<Props> = (props: Props) => {
         <RefreshIcon width={22} height={22} onClick={handler.refreshEvent}/>
       </div>
     </div>
-    <div className={styles.body} ref={containerRef}>
+    <div className={styles.body} ref={containerRef} style={{width: conf.width + "px", height: conf.height + "px"}}>
       <div className={styles.loading}>
         <LoadingIcon />
       </div>
