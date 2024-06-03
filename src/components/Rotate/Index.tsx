@@ -60,13 +60,13 @@ const Index:FC<Props> = (props: Props) => {
       </div>
 
       <div className={cstyles.picture} style={{width: conf.size + 'px', height: conf.size + 'px'}}>
-        <img className={data.image == '' && styles.hide} src={data.image} alt="..." />
+        <img className={data.image == '' ? styles.hide : ''} src={data.image} alt="..." />
         <div className={cstyles.round} />
       </div>
 
       <div className={cstyles.thumb}>
         <div className={cstyles.thumbBlock} style={{ transform: `rotate(${handler.getState().thumbAngle}deg)`}}>
-          <img className={data.thumb == '' && styles.hide} src={data.thumb} alt="..." />
+          <img className={data.thumb == '' ? styles.hide : ''} src={data.thumb} alt="..." />
         </div>
       </div>
     </div>

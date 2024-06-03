@@ -60,9 +60,9 @@ const Index:FC<Props> = (props: Props) => {
       <div className={styles.loading}>
         <LoadingIcon />
       </div>
-      <img className={classnames(styles.picture, data.image == '' && styles.hide)} style={{width: conf.width + "px", height: conf.height + "px"}} src={data.image} alt="..." />
+      <img className={classnames(styles.picture, data.image == '' ? styles.hide : '')} style={{width: conf.width + "px", height: conf.height + "px"}} src={data.image} alt="..." />
       <div className={cstyles.tile} ref={tileRef} style={{width: (data.thumbWidth || 0) + 'px', height: (data.thumbHeight || 0) + 'px', top: (data.thumbY || 0) + "px", left: handler.getState().thumbLeft + "px"}}>
-        <img className={data.thumb == '' && styles.hide} src={data.thumb} alt="..."/>
+        <img className={data.thumb == '' ? styles.hide : ''} src={data.thumb} alt="..."/>
       </div>
     </div>
     <div className={styles.footer}>

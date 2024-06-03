@@ -37,7 +37,7 @@ const Index:FC<Props> = (props: Props) => {
   }
 
   return <div
-    className={classnames(styles.btnBlock, cn, props.disabled && styles.disabled)}
+    className={classnames(styles.btnBlock, cn, props.disabled ? styles.disabled : '')}
     style={{
       width:  conf.width + "px",
       height: conf.height + "px",
