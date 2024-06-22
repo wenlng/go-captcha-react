@@ -1,19 +1,19 @@
 /**
  * @Author Awen
- * @Date 2024/05/25
+ * @Date 2024/06/01
  * @Email wengaolng@gmail.com
  **/
 
 import {useCallback, useState} from "react";
-import {CaptchaData, CaptchaDot} from "../meta/data";
-import {CaptchaEvent} from "../meta/event";
+import {ClickData, ClickDot} from "../meta/data";
+import {ClickEvent} from "../meta/event";
 import {getDomXY} from "../../../helper/helper";
 
 export const useHandler = (
-  _data: CaptchaData,
-  event: CaptchaEvent,
+  _data: ClickData,
+  event: ClickEvent,
 ) => {
-  const [dots, setDots] = useState<Array<CaptchaDot>>([])
+  const [dots, setDots] = useState<Array<ClickDot>>([])
 
   const clickEvent = useCallback<any>((e: Event|any) => {
     const dom = e.currentTarget

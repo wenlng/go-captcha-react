@@ -1,9 +1,10 @@
 /**
  * @Author Awen
- * @Date 2024/05/25
+ * @Date 2024/06/01
  * @Email wengaolng@gmail.com
  **/
-export interface CaptchaEvent {
+
+export interface RotateEvent {
   rotate?: (angle: number) => void;
   refresh?: () => void;
   close?: () => void;

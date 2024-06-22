@@ -1,6 +1,6 @@
 /**
  * @Author Awen
- * @Date 2024/05/25
+ * @Date 2024/06/01
  * @Email wengaolng@gmail.com
  **/
 
@@ -11,15 +11,15 @@ import styles from './../../gocaptcha.module.less'
 import CloseIcon from './../../assets/icons/CloseIcon'
 import RefreshIcon from './../../assets/icons/RefreshIcon'
 import LoadingIcon from './../../assets/icons/LoadingIcon'
-import {CaptchaConfig, defaultConfig} from "./meta/config";
+import {SlideRegionConfig, defaultConfig} from "./meta/config";
 import {useHandler} from "./hooks/useHandler";
-import {CaptchaData} from "./meta/data";
-import {CaptchaEvent} from "./meta/event";
+import {SlideRegionData} from "./meta/data";
+import {SlideRegionEvent} from "./meta/event";
 
 export interface Props extends React.HTMLAttributes<HTMLElement> {
-  data: CaptchaData,
-  config?: CaptchaConfig;
-  events?: CaptchaEvent,
+  data: SlideRegionData,
+  config?: SlideRegionConfig;
+  events?: SlideRegionEvent,
 }
 
 const Index:FC<Props> = (props: Props) => {
@@ -36,7 +36,7 @@ const Index:FC<Props> = (props: Props) => {
 
   const hPadding = conf.horizontalPadding || 0
   const vPadding = conf.verticalPadding || 0
-  const width = (conf.width || 0) + ( vPadding * 2)
+  const width = (conf.width || 0) + ( hPadding * 2) + (conf.showTheme ? 2 : 0)
 
   useEffect(() => {
     tileRef.current.addEventListener('dragstart', (event: any) => event.preventDefault());
@@ -45,13 +45,13 @@ const Index:FC<Props> = (props: Props) => {
   return <div className={classnames(styles.wrapper, cstyles.wrapper, conf.showTheme ? styles.theme : '')}
               style={{
                 width:  width+ "px",
-                paddingLeft: vPadding + "px",
-                paddingRight: vPadding + "px",
-                paddingTop: hPadding + "px",
-                paddingBottom: hPadding + "px",
+                paddingLeft: hPadding + "px",
+                paddingRight: hPadding + "px",
+                paddingTop: vPadding + "px",
+                paddingBottom: vPadding + "px",
               }}>
     <div className={classnames(styles.header, cstyles.header)}>
-      <span>请拖动滑块完成拼图</span>
+      <span>{conf.title}</span>
     </div>
     <div className={styles.body} ref={containerRef} style={{width: conf.width + "px", height: conf.height + "px"}}>
       <div className={styles.loading}>

@@ -1,15 +1,15 @@
 /**
  * @Author Awen
- * @Date 2024/05/25
+ * @Date 2024/06/01
  * @Email wengaolng@gmail.com
  **/
 
-import {CaptchaDot} from "./data";
+import {ClickDot} from "./data";
 
-export interface CaptchaEvent {
+export interface ClickEvent {
   click?: (x: number, y: number) => void;
   callback?: () => void;
   refresh?: () => void;
   close?: () => void;
-  confirm?:(dots: Array<CaptchaDot>, clear:(fn: Function) => void) => void;
+  confirm?:(dots: Array<ClickDot>, clear:(fn: Function) => void) => void;
 }

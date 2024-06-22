@@ -1,10 +1,10 @@
 /**
  * @Author Awen
- * @Date 2024/05/25
+ * @Date 2024/06/01
  * @Email wengaolng@gmail.com
  **/
 
-export interface CaptchaData {
+export interface SlideData {
   thumbX: number;
   thumbY: number;
   thumbWidth: number;
@@ -13,7 +13,7 @@ export interface CaptchaData {
   thumb: string;
 }
 
-export interface CaptchaPoint {
+export interface SlidePoint {
   x: number,
   y: number,
 }

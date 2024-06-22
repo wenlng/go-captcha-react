@@ -1,21 +1,21 @@
 /**
  * @Author Awen
- * @Date 2024/05/25
+ * @Date 2024/06/01
  * @Email wengaolng@gmail.com
  **/
 
 import {MutableRefObject, useCallback, useState} from "react";
-import {CaptchaData, CaptchaPoint} from "../meta/data";
-import {CaptchaEvent} from "../meta/event";
+import {SlideRegionData, SlideRegionPoint} from "../meta/data";
+import {SlideRegionEvent} from "../meta/event";
 import {checkTargetFather} from "../../../helper/helper";
 
 export const useHandler = (
-  data: CaptchaData,
-  event: CaptchaEvent,
+  data: SlideRegionData,
+  event: SlideRegionEvent,
   containerRef: MutableRefObject<any>,
   tileRef: MutableRefObject<any>,
 ) => {
-  const [thumbPoint, setThumbPoint] = useState<CaptchaPoint>({x: data.thumbX || 0, y: data.thumbY || 0})
+  const [thumbPoint, setThumbPoint] = useState<SlideRegionPoint>({x: data.thumbX || 0, y: data.thumbY || 0})
 
   const clear = useCallback<any>(() => {
     setThumbPoint({x: data.thumbX || 0, y: data.thumbY || 0})

@@ -1,5 +1,11 @@
+/**
+ * @Author Awen
+ * @Date 2024/06/01
+ * @Email wengaolng@gmail.com
+ **/
+
 import React, {FC} from "react";
-import {CaptchaConfig, defaultConfig} from "./meta/config";
+import {ButtonConfig, defaultConfig} from "./meta/config";
 import styles from './index.module.less'
 import BtnDefaultIcon from "../../assets/icons/BtnDefaultIcon";
 import BtnErrorIcon from "../../assets/icons/BtnErrorIcon";
@@ -7,11 +13,13 @@ import BtnWarnIcon from "../../assets/icons/BtnWarnIcon";
 import BtnSuccessIcon from "../../assets/icons/BtnSuccessIcon";
 import classnames from "classnames";
 
+export type ButtonType = "default" | "warn" | "error" | "success";
+
 export interface Props extends React.HTMLAttributes<HTMLElement> {
-  config?: CaptchaConfig;
+  config?: ButtonConfig;
   clickEvent?: () => void;
   disabled?: boolean;
-  type?: "default" | "warn" | "error" | "success";
+  type?: ButtonType;
   title?: string;
 }
 

@@ -1,6 +1,6 @@
 /**
  * @Author Awen
- * @Date 2024/05/25
+ * @Date 2024/06/01
  * @Email wengaolng@gmail.com
  **/
 
@@ -52,34 +52,38 @@
 }
 
 .default{
-  color: #3e7cff;
+  color: var(--go-captcha-theme-default-color);
   border: 1px solid #50a1ff;
-  background: #ecf5ff;
+  border-color: var(--go-captcha-theme-default-border-color);
+  background-color: var(--go-captcha-theme-default-bg-color);
   cursor: pointer;
 
   &:hover{
-    background: #e0efff !important;
+    background-color: var(--go-captcha-theme-default-hover-color) !important;
   }
 }
 
 .error{
   cursor: pointer;
-  color: #ed4630;
-  background: #fef0f0;
+  color: var(--go-captcha-theme-error-color);
+  background-color: var(--go-captcha-theme-error-bg-color);
   border: 1px solid #ff5a34;
+  border-color: var(--go-captcha-theme-error-border-color);
 }
 
 .warn{
   cursor: pointer;
-  color: #ffa000;
-  background: #fdf6ec;
+  color: var(--go-captcha-theme-warn-color);
+  background-color: var(--go-captcha-theme-warn-bg-color);
   border: 1px solid #ffbe09;
+  border-color: var(--go-captcha-theme-warn-border-color);
 }
 
 .success{
-  color: #5eaa2f;
-  background: #f0f9eb;
+  color: var(--go-captcha-theme-success-color);
+  background-color: var(--go-captcha-theme-success-bg-color);
   border: 1px solid #8bc640;
+  border-color: var(--go-captcha-theme-success-border-color);
   pointer-events: none;
 }
 
@@ -99,26 +103,30 @@
   :global {
     svg {
       position: relative;
-      z-index: 10;
+      z-index: 2;
     }
   }
 
+  & > *{
+    z-index: 2;
+  }
+
   &::after {
-    background: #409eff;
+    background-color: var(--go-captcha-theme-default-border-color);
     -webkit-border-radius: 50px;
     -moz-border-radius: 50px;
     border-radius: 50px;
     content: "";
     display: block;
-    width: 20px;
-    height: 20px;
+    width: 21px;
+    height: 21px;
     opacity: 0;
     position: absolute;
     top: 50%;
     left: 50%;
-    margin-top:  -10px;
-    margin-left:  -10px;
-    z-index: 9;
+    margin-top:  -11px;
+    margin-left:  -11px;
+    z-index: 1;
 
     animation: ripple 1.3s infinite;
     -moz-animation: ripple 1.3s infinite;

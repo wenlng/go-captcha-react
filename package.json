@@ -1,10 +1,10 @@
 {
   "name": "go-captcha-react",
-  "version": "2.0.0",
-  "author": "Awen",
+  "version": "1.0.0",
   "license": "MIT",
   "private": false,
   "email": "wengaolng@gmail.com",
+  "author": "Awen <wengaolng@gmail.com>",
   "description": "This is the react package for go-captcha",
   "keywords": [
     "go-captcha-react",
@@ -22,6 +22,7 @@
     "type": "git",
     "url": "git+https://github.com/wenlng/go-captcha-react.git"
   },
+  "homepage": "https://github.com/wenlng/go-captcha-react",
   "module": "dist/go-captcha-react.esm.js",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",

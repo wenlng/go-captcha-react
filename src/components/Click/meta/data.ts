@@ -1,16 +1,16 @@
 /**
  * @Author Awen
- * @Date 2024/05/25
+ * @Date 2024/06/01
  * @Email wengaolng@gmail.com
  **/
 
 
-export interface CaptchaData {
+export interface ClickData {
   image: string;
   thumb: string;
 }
 
-export interface CaptchaDot {
+export interface ClickDot {
   key: number,
   index: number,
   x: number,

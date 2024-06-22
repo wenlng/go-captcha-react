@@ -1,5 +1,11 @@
 # Go Captcha React Package
 
+<p> ⭐️ If it helps you, please give a star.</p>
+<img src="http://47.104.180.148/go-captcha/go-captcha-v2.jpg" alt="Poster">
+
+<br/>
+
+## Install
 ```shell
 yarn add go-captcha-react
 # or
@@ -19,10 +25,10 @@ import GoCaptcha from 'go-captcha-react';
 />
 ```
 
-### params
+### Parameter Reference
 ```ts
 // config = {}
-interface Config {
+interface ClickConfig {
   width?: number;
   height?: number;
   thumbWidth?: number;
@@ -30,20 +36,22 @@ interface Config {
   verticalPadding?: number;
   horizontalPadding?: number;
   showTheme?: boolean;
+  title?: string;
+  buttonText?: string;
 }
 
 // data = {}
-interface Data {
+interface ClickData {
   image: string;
   thumb: string;
 }
 
 // events = {}
-interface Events {
+interface ClickEvents {
   click?: (x: number, y: number) => void;
   refresh?: () => void;
   close?: () => void;
-  confirm?: (dots: Array<CaptchaDot>) => boolean;
+  confirm?: (dots: Array<ClickDot>) => boolean;
 }
 ```
 
@@ -63,10 +71,10 @@ import GoCaptcha from 'go-captcha-react';
   events={{}}
 />
 ```
-### params
+### Parameter Reference
 ```ts
 // config = {}
-interface Config {
+interface SlideConfig {
   width?: number;
   height?: number;
   thumbWidth?: number;
@@ -74,10 +82,11 @@ interface Config {
   verticalPadding?: number;
   horizontalPadding?: number;
   showTheme?: boolean;
+  title?: string;
 }
 
 // data = {}
-interface Data {
+interface SlideData {
   thumbX: number;
   thumbY: number;
   thumbWidth: number;
@@ -87,11 +96,43 @@ interface Data {
 }
 
 // events = {}
-interface Events {
+interface SlideEvents {
   move?: (x: number, y: number) => void;
   refresh?: () => void;
   close?: () => void;
-  confirm?: (point: CaptchaPoint) => boolean;
+  confirm?: (point: SlidePoint) => boolean;
+}
+```
+
+```ts
+// config = {}
+interface SlideRegionConfig {
+  width?: number;
+  height?: number;
+  thumbWidth?: number;
+  thumbHeight?: number;
+  verticalPadding?: number;
+  horizontalPadding?: number;
+  showTheme?: boolean;
+  title?: string;
+}
+
+// data = {}
+interface SlideRegionData {
+  thumbX: number;
+  thumbY: number;
+  thumbWidth: number;
+  thumbHeight: number;
+  image: string;
+  thumb: string;
+}
+
+// events = {}
+interface SlideRegionEvents {
+  move?: (x: number, y: number) => void;
+  refresh?: () => void;
+  close?: () => void;
+  confirm?: (point: SlideRegionPoint) => boolean;
 }
 ```
 
@@ -107,10 +148,10 @@ import GoCaptcha from 'go-captcha-react';
 />
 ```
 
-### params
+### Parameter Reference
 ```ts
 // config = {}
-interface Config {
+interface RotateConfig {
   width?: number;
   height?: number;
   thumbWidth?: number;
@@ -118,20 +159,57 @@ interface Config {
   verticalPadding?: number;
   horizontalPadding?: number;
   showTheme?: boolean;
+  title?: string;
 }
 
 // data = {}
-interface Data {
+interface RotateData {
   angle: number;
   image: string;
   thumb: string;
 }
 
 // events = {}
-interface Events {
+interface RotateEvents {
   rotate?: (angle: number) => void;
   refresh?: () => void;
   close?: () => void;
   confirm?: (angle: number) => boolean;
 }
 ```
+
+
+## 🖖 Button
+```jsx
+import GoCaptcha from 'go-captcha-react';
+
+<GoCaptcha.Button />
+```
+
+### Parameter Reference
+```ts
+interface _ {
+  config?: ButtonConfig;
+  clickEvent?: () => void;
+  disabled?: boolean;
+  type?: "default" | "warn" | "error" | "success";
+  title?: string;
+}
+
+export interface ButtonConfig {
+  width?: number;
+  height?: number;
+  verticalPadding?: number;
+  horizontalPadding?: number;
+}
+```
+
+<br/>
+
+## 🍹 Buy me a coffee
+<div>
+<a href="http://witkeycode.com/sponsor" target="_blank"><img src="http://47.104.180.148/payment-code/wxpay.png" alt="Buy Me A Coffee" style="width: 217px !important;" ></a>
+<a href="http://witkeycode.com/sponsor" target="_blank"><img src="http://47.104.180.148/payment-code/alipay.png" alt="Buy Me A Coffee" style="width: 217px !important;" ></a>
+</div>
+
+<br/>
