@@ -70,10 +70,12 @@ const Index:FC<Props> = (props: Props) => {
       </div>
     </div>
     <div className={styles.footer}>
-      <div className={styles.dragSlideBar} ref={dragBarRef} onMouseDown={handler.dragEvent}>
+      <div className={styles.dragSlideBar} ref={dragBarRef}>
         <div className={styles.dragLine} />
-        <div className={styles.dragBlock} ref={dragBlockRef} onTouchStart={handler.dragEvent} style={{left: handler.getState().dragLeft + "px"}}>
-          <ArrowsIcon />
+        <div className={styles.dragBlock} ref={dragBlockRef} onMouseDown={handler.dragEvent} style={{left: handler.getState().dragLeft + "px"}}>
+          <div className={styles.dragBlockInline} onTouchStart={handler.dragEvent}>
+            <ArrowsIcon />
+          </div>
         </div>
       </div>
     </div>

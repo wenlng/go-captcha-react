@@ -133,6 +133,13 @@ const App = () => {
           },
           close(): void {
             console.log("close >>>>>>>")
+          },
+          confirm(point: any, clear: Function): void {
+            console.log("point >>>>>>>", point)
+
+            setTimeout(() => {
+              clear()
+            }, 100)
           }
         }}
       />
