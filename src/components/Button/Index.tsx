@@ -4,7 +4,7 @@
  * @Email wengaolng@gmail.com
  **/
 
-import React, {FC} from "react";
+import React, {FC, useEffect, useState} from "react";
 import {ButtonConfig, defaultConfig} from "./meta/config";
 import styles from './index.module.less'
 import BtnDefaultIcon from "../../assets/icons/BtnDefaultIcon";
@@ -24,10 +24,11 @@ export interface Props extends React.HTMLAttributes<HTMLElement> {
 }
 
 const Index:FC<Props> = (props: Props) => {
-  const conf = {
-    ...defaultConfig(),
-    ...(props.config || {})
-  }
+  const [localConfig, setLocalConfig] = useState<ButtonConfig>({...defaultConfig(), ...(props.config || {})})
+
+  useEffect(() => {
+    setLocalConfig({...localConfig, ...(props.config || {})})
+  }, [props.config])
 
   const type = props.type || "default"
 
@@ -47,12 +48,12 @@ const Index:FC<Props> = (props: Props) => {
   return <div
     className={classnames(styles.btnBlock, cn, props.disabled ? styles.disabled : '')}
     style={{
-      width:  conf.width + "px",
-      height: conf.height + "px",
-      paddingLeft: conf.verticalPadding + "px",
-      paddingRight: conf.verticalPadding + "px",
-      paddingTop: conf.verticalPadding + "px",
-      paddingBottom: conf.verticalPadding + "px",
+      width:  localConfig.width + "px",
+      height: localConfig.height + "px",
+      paddingLeft: localConfig.verticalPadding + "px",
+      paddingRight: localConfig.verticalPadding + "px",
+      paddingTop: localConfig.verticalPadding + "px",
+      paddingBottom: localConfig.verticalPadding + "px",
     }}
     onClick={props.clickEvent}
   >

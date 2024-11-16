@@ -10,10 +10,14 @@ import {ClickEvent} from "../meta/event";
 import {getDomXY} from "../../../helper/helper";
 
 export const useHandler = (
-  _data: ClickData,
+  data: ClickData,
   event: ClickEvent,
 ) => {
   const [dots, setDots] = useState<Array<ClickDot>>([])
+
+  const resetData = useCallback<any>(() => {
+    setDots([])
+  }, [setDots])
 
   const clickEvent = useCallback<any>((e: Event|any) => {
     const dom = e.currentTarget
@@ -42,32 +46,46 @@ export const useHandler = (
 
   const confirmEvent = useCallback<any>((e: Event|any) => {
     event.confirm && event.confirm(dots, () => {
-      setDots([])
+      resetData()
     })
     e.cancelBubble = true
     e.preventDefault()
     return false
-  }, [dots, event])
-
-  const closeEvent = useCallback<any>((e: Event|any) => {
-    event.close && event.close()
-    setDots([])
-    e.cancelBubble = true
-    e.preventDefault()
-    return false
-  }, [event])
-
-  const refreshEvent = useCallback<any>((e: Event|any) => {
-    event.refresh && event.refresh()
-    setDots([])
-    e.cancelBubble = true
-    e.preventDefault()
-    return false
-  }, [event])
+  }, [dots, event, resetData])
 
   const getDots = useCallback<any>(() => {
     return dots
   }, [dots])
+
+  const clearData = useCallback<any>(() => {
+    resetData()
+    data.thumb = ''
+    data.image = ''
+  }, [resetData, data])
+
+  const close = useCallback<any>(() => {
+    event.close && event.close()
+    resetData()
+  }, [event, resetData])
+
+  const refresh = useCallback<any>(() => {
+    event.refresh && event.refresh()
+    resetData()
+  }, [resetData])
+
+  const closeEvent = useCallback<any>((e: Event|any) => {
+    close()
+    e.cancelBubble = true
+    e.preventDefault()
+    return false
+  }, [close])
+
+  const refreshEvent = useCallback<any>((e: Event|any) => {
+    refresh()
+    e.cancelBubble = true
+    e.preventDefault()
+    return false
+  }, [event, refresh])
 
   return {
     setDots,
@@ -76,5 +94,9 @@ export const useHandler = (
     confirmEvent,
     closeEvent,
     refreshEvent,
+    resetData,
+    clearData,
+    close,
+    refresh,
   }
 }

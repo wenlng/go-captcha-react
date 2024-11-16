@@ -4,22 +4,32 @@
  * @Email wengaolng@gmail.com
  **/
 
-import {MutableRefObject, useCallback, useState} from "react";
+import {MutableRefObject, useCallback, useEffect, useState} from "react";
 import {SlideRegionData, SlideRegionPoint} from "../meta/data";
 import {SlideRegionEvent} from "../meta/event";
 import {checkTargetFather} from "../../../helper/helper";
+import {SlideRegionConfig} from "../meta/config";
 
 export const useHandler = (
   data: SlideRegionData,
   event: SlideRegionEvent,
+  config: SlideRegionConfig,
+  rootRef: MutableRefObject<any>,
   containerRef: MutableRefObject<any>,
   tileRef: MutableRefObject<any>,
 ) => {
   const [thumbPoint, setThumbPoint] = useState<SlideRegionPoint>({x: data.thumbX || 0, y: data.thumbY || 0})
+  const [isFreeze, setIsFreeze] = useState<boolean>(false)
 
-  const clear = useCallback<any>(() => {
+  useEffect(() => {
+    if(!isFreeze){
+      setThumbPoint({x: data.thumbX || 0, y: data.thumbY || 0})
+    }
+  }, [data, setThumbPoint])
+
+  const resetData = useCallback<any>(() => {
     setThumbPoint({x: data.thumbX || 0, y: data.thumbY || 0})
-  }, [data.thumbX, data.thumbY])
+  }, [data.thumbX, data.thumbY, setThumbPoint])
 
   const dragEvent = useCallback<any>((e: Event|any) => {
     const touch = e.touches && e.touches[0];
@@ -96,8 +106,12 @@ export const useHandler = (
       isMoving = false
       clearEvent()
 
+      if (tileLeft <= 0 || tileTop <= 0) {
+        return
+      }
+
       event.confirm && event.confirm({x: tileLeft, y: tileTop}, () => {
-        clear()
+        resetData()
       })
 
       e.cancelBubble = true
@@ -121,52 +135,83 @@ export const useHandler = (
       clearEvent()
     }
 
+    const scope = config.scope
+    const dragDom = scope ? rootRef.current : containerRef.current
+    const scopeDom = scope ? rootRef.current : document.body
+
     const clearEvent = () => {
-      containerRef.current.removeEventListener("mousemove", moveEvent, false)
-      containerRef.current.removeEventListener("touchmove", moveEvent, { passive: false })
+      scopeDom.removeEventListener("mousemove", moveEvent, false)
+      scopeDom.removeEventListener("touchmove", moveEvent, { passive: false })
 
-      containerRef.current.removeEventListener( "mouseup", upEvent, false)
+      dragDom.removeEventListener( "mouseup", upEvent, false)
       // containerRef.current.removeEventListener( "mouseout", upEvent, false)
-      containerRef.current.removeEventListener( "mouseenter", enterDragBlockEvent, false)
-      containerRef.current.removeEventListener( "mouseleave", leaveDragBlockEvent, false)
-      containerRef.current.removeEventListener("touchend", upEvent, false)
+      dragDom.removeEventListener( "mouseenter", enterDragBlockEvent, false)
+      dragDom.removeEventListener( "mouseleave", leaveDragBlockEvent, false)
+      dragDom.removeEventListener("touchend", upEvent, false)
 
-      document.body.removeEventListener("mouseleave", upEvent, false)
-      document.body.removeEventListener("mouseup", leaveUpEvent, false)
+      scopeDom.removeEventListener("mouseleave", upEvent, false)
+      scopeDom.removeEventListener("mouseup", leaveUpEvent, false)
+
+      setIsFreeze(false)
     }
 
-    containerRef.current.addEventListener("mousemove", moveEvent, false)
-    containerRef.current.addEventListener("touchmove", moveEvent, { passive: false })
-    containerRef.current.addEventListener( "mouseup", upEvent, false)
-    // containerRef.current.addEventListener( "mouseout", upEvent, false)
-    containerRef.current.addEventListener( "mouseenter", enterDragBlockEvent, false)
-    containerRef.current.addEventListener( "mouseleave", leaveDragBlockEvent, false)
-    containerRef.current.addEventListener("touchend", upEvent, false)
+    setIsFreeze(true)
 
-    document.body.addEventListener("mouseleave", upEvent, false)
-    document.body.addEventListener("mouseup", leaveUpEvent, false)
-  }, [containerRef, tileRef, event, clear])
+    scopeDom.addEventListener("mousemove", moveEvent, false)
+    scopeDom.addEventListener("touchmove", moveEvent, { passive: false })
+
+    dragDom.addEventListener( "mouseup", upEvent, false)
+    // containerRef.current.addEventListener( "mouseout", upEvent, false)
+    dragDom.addEventListener( "mouseenter", enterDragBlockEvent, false)
+    dragDom.addEventListener( "mouseleave", leaveDragBlockEvent, false)
+    dragDom.addEventListener("touchend", upEvent, false)
+
+    scopeDom.addEventListener("mouseleave", upEvent, false)
+    scopeDom.addEventListener("mouseup", leaveUpEvent, false)
+  }, [rootRef, containerRef, tileRef, config, event, setIsFreeze, resetData])
+
+  const clearData = useCallback<any>(() => {
+    resetData()
+    data.thumb = ''
+    data.image = ''
+    data.thumbX = 0
+    data.thumbY = 0
+    data.thumbWidth = 0
+    data.thumbHeight = 0
+  }, [resetData, data])
+
+  const close = useCallback<any>(() => {
+    event.close && event.close()
+    resetData()
+  }, [event, resetData])
+
+  const refresh = useCallback<any>(() => {
+    event.refresh && event.refresh()
+    resetData()
+  }, [event, resetData])
 
   const closeEvent = useCallback<any>((e: Event|any) => {
-    event && event.close && event.close()
-    clear()
+    close()
     e.cancelBubble = true
     e.preventDefault()
     return false
-  }, [clear, event])
+  }, [close])
 
   const refreshEvent = useCallback<any>((e: Event|any) => {
-    event && event.refresh && event.refresh()
-    clear()
+    refresh()
     e.cancelBubble = true
     e.preventDefault()
     return false
-  }, [clear, event])
+  }, [refresh])
 
   return {
     thumbPoint,
     dragEvent,
     closeEvent,
     refreshEvent,
+    resetData,
+    clearData,
+    close,
+    refresh,
   }
 }

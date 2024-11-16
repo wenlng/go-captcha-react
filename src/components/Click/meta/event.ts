@@ -11,5 +11,5 @@ export interface ClickEvent {
   callback?: () => void;
   refresh?: () => void;
   close?: () => void;
-  confirm?:(dots: Array<ClickDot>, clear:(fn: Function) => void) => void;
+  confirm?:(dots: Array<ClickDot>, reset:() => void) => void;
 }
