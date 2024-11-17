@@ -13,7 +13,7 @@ import RefreshIcon from './../../assets/icons/RefreshIcon'
 import LoadingIcon from './../../assets/icons/LoadingIcon'
 import {SlideRegionConfig, defaultConfig} from "./meta/config";
 import {useHandler} from "./hooks/useHandler";
-import {SlideRegionData} from "./meta/data";
+import {defaultSlideRegionData, SlideRegionData} from "./meta/data";
 import {SlideRegionEvent} from "./meta/event";
 
 export interface SlideRegionRef {
@@ -32,7 +32,7 @@ export interface Props extends React.HTMLAttributes<HTMLElement> {
 
 const Index:FC<Props> = forwardRef<SlideRegionRef, Props>((props: Props, ref) => {
   const [localConfig, setLocalConfig] = useState<SlideRegionConfig>({...defaultConfig(), ...(props.config || {})})
-  const [localData, setLocalData] = useState<SlideRegionData>({...(props.data || {})})
+  const [localData, setLocalData] = useState<SlideRegionData>({...defaultSlideRegionData(), ...(props.data || {})})
   const [localEvents, setLocalEvents] = useState<SlideRegionEvent>({...(props.events || {})})
 
   useEffect(() => {
@@ -59,7 +59,7 @@ const Index:FC<Props> = forwardRef<SlideRegionRef, Props>((props: Props, ref) =>
     containerRef,
     tileRef,
     () => {
-      setLocalData({...localData, image: '', thumb: '', thumbX: 0, thumbY: 0, thumbHeight: 0, thumbWidth: 0})
+      setLocalData({...localData, ...defaultSlideRegionData()})
     }
   );
 

@@ -14,7 +14,7 @@ import LoadingIcon from './../../assets/icons/LoadingIcon'
 import ArrowsIcon from "../../assets/icons/ArrowsIcon";
 import {RotateConfig, defaultConfig} from "./meta/config";
 import {useHandler} from "./hooks/useHandler";
-import {RotateData} from "./meta/data";
+import {defaultRotateData, RotateData} from "./meta/data";
 import {RotateEvent} from "./meta/event";
 
 
@@ -34,7 +34,7 @@ export interface Props extends React.HTMLAttributes<HTMLElement> {
 
 const Index:FC<Props> = forwardRef<RotateRef, Props>((props: Props, ref) => {
   const [localConfig, setLocalConfig] = useState<RotateConfig>({...defaultConfig(), ...(props.config || {})})
-  const [localData, setLocalData] = useState<RotateData>({...(props.data || {})})
+  const [localData, setLocalData] = useState<RotateData>({...defaultRotateData(), ...(props.data || {})})
   const [localEvents, setLocalEvents] = useState<RotateEvent>({...(props.events || {})})
 
   useEffect(() => {
@@ -61,7 +61,7 @@ const Index:FC<Props> = forwardRef<RotateRef, Props>((props: Props, ref) => {
     dragBlockRef,
     dragBarRef,
     () => {
-      setLocalData({...localData, thumb: '', image: '', angle: 0})
+      setLocalData({...localData, ...defaultRotateData()})
     });
 
   const hPadding = localConfig.horizontalPadding || 0
@@ -116,7 +116,7 @@ const Index:FC<Props> = forwardRef<RotateRef, Props>((props: Props, ref) => {
         height: localConfig.height + 'px'
       }}
     >
-      <div style={{width: size  + "px", height: size + "px" }}>
+      <div className={classnames(cstyles.bodyInner, styles.bodyInner)} style={{width: size  + "px", height: size + "px" }}>
         <div className={styles.loading}>
           <LoadingIcon />
         </div>

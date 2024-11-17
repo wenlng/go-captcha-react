@@ -12,7 +12,7 @@ import CloseIcon from './../../assets/icons/CloseIcon'
 import RefreshIcon from './../../assets/icons/RefreshIcon'
 import LoadingIcon from './../../assets/icons/LoadingIcon'
 import ArrowsIcon from './../../assets/icons/ArrowsIcon'
-import {SlideData} from "./meta/data";
+import {defaultSlideData, SlideData} from "./meta/data";
 import {SlideConfig, defaultConfig} from "./meta/config";
 import {SlideEvent} from "./meta/event";
 import {useHandler} from "./hooks/useHandler";
@@ -33,7 +33,7 @@ export interface Props extends React.HTMLAttributes<HTMLElement> {
 
 const Index:FC<Props> = forwardRef<SlideRef, Props>((props: Props, ref) => {
   const [localConfig, setLocalConfig] = useState<SlideConfig>({...defaultConfig(), ...(props.config || {})})
-  const [localData, setLocalData] = useState<SlideData>({...(props.data || {})})
+  const [localData, setLocalData] = useState<SlideData>({...defaultSlideData(), ...(props.data || {})})
   const [localEvents, setLocalEvents] = useState<SlideEvent>({...(props.events || {})})
 
   useEffect(() => {
@@ -64,7 +64,7 @@ const Index:FC<Props> = forwardRef<SlideRef, Props>((props: Props, ref) => {
     dragBlockRef,
     dragBarRef,
     () => {
-      setLocalData({...localData, image: '', thumb: '', thumbX: 0, thumbY: 0, thumbHeight: 0, thumbWidth: 0})
+      setLocalData({...localData, ...defaultSlideData()})
     }
     );
 

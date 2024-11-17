@@ -9,3 +9,9 @@ export interface RotateData {
   image: string;
   thumb: string;
 }
+
+export const defaultRotateData = () :RotateData => ({
+  angle: 0,
+  image: '',
+  thumb: ''
+})
