@@ -54,7 +54,19 @@ const Index:FC<Props> = forwardRef<SlideRef, Props>((props: Props, ref) => {
   const dragBlockRef = useRef<any>(null)
   const tileRef = useRef<any>(null)
 
-  const handler = useHandler(localData, localEvents, localConfig, rootRef, containerRef, tileRef, dragBlockRef, dragBarRef);
+  const handler = useHandler(
+    localData,
+    localEvents,
+    localConfig,
+    rootRef,
+    containerRef,
+    tileRef,
+    dragBlockRef,
+    dragBarRef,
+    () => {
+      setLocalData({...localData, image: '', thumb: '', thumbX: 0, thumbY: 0, thumbHeight: 0, thumbWidth: 0})
+    }
+    );
 
   const hPadding = localConfig.horizontalPadding || 0
   const vPadding = localConfig.verticalPadding || 0
@@ -140,7 +152,7 @@ const Index:FC<Props> = forwardRef<SlideRef, Props>((props: Props, ref) => {
       <div className={styles.dragSlideBar} ref={dragBarRef}>
         <div className={styles.dragLine} />
         <div
-          className={classnames(styles.dragBlock, !hasDisplayImageState && 'disabled')}
+          className={classnames(styles.dragBlock, !hasDisplayImageState && styles.disabled)}
           ref={dragBlockRef}
           onMouseDown={handler.dragEvent}
           style={{left: handler.getState().dragLeft + "px"}}

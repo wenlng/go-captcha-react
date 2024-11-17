@@ -53,7 +53,16 @@ const Index:FC<Props> = forwardRef<RotateRef, Props>((props: Props, ref) => {
   const dragBarRef = useRef<any>(null)
   const dragBlockRef = useRef<any>(null)
 
-  const handler = useHandler(localData, localEvents, localConfig, rootRef, dragBlockRef, dragBarRef);
+  const handler = useHandler(
+    localData,
+    localEvents,
+    localConfig,
+    rootRef,
+    dragBlockRef,
+    dragBarRef,
+    () => {
+      setLocalData({...localData, thumb: '', image: '', angle: 0})
+    });
 
   const hPadding = localConfig.horizontalPadding || 0
   const vPadding = localConfig.verticalPadding || 0
@@ -136,7 +145,7 @@ const Index:FC<Props> = forwardRef<RotateRef, Props>((props: Props, ref) => {
             <img
               className={localData.thumb == '' ? styles.hide : ''}
               src={localData.thumb}
-              style={{display: hasDisplayImageState ? 'block' : 'none' }}
+              style={{visibility: hasDisplayImageState ? 'visible' : 'hidden' }}
               alt=""
             />
           </div>
@@ -147,7 +156,7 @@ const Index:FC<Props> = forwardRef<RotateRef, Props>((props: Props, ref) => {
       <div className={styles.dragSlideBar} ref={dragBarRef}>
         <div className={styles.dragLine} />
         <div
-          className={classnames(styles.dragBlock, !hasDisplayImageState && 'disabled')}
+          className={classnames(styles.dragBlock, !hasDisplayImageState && styles.disabled)}
           ref={dragBlockRef}
           onMouseDown={handler.dragEvent}
           style={{left: handler.getState().dragLeft + "px"}}

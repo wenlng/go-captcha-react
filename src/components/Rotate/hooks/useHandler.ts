@@ -17,6 +17,7 @@ export const useHandler = (
   rootRef: MutableRefObject<any>,
   dragBlockRef: MutableRefObject<any>,
   dragBarRef: MutableRefObject<any>,
+  clearCbs: () => void,
 ) => {
   const [dragLeft, setDragLeft] = useState<number>(0)
   const [thumbAngle, setThumbAngle] = useState<number>(data.angle || 0)
@@ -103,7 +104,7 @@ export const useHandler = (
       isMoving = false
       clearEvent()
 
-      if (currentAngle <= 0) {
+      if (currentAngle < 0) {
         return
       }
 
@@ -141,7 +142,6 @@ export const useHandler = (
       scopeDom.removeEventListener("touchmove", moveEvent, { passive: false })
 
       dragDom.removeEventListener( "mouseup", upEvent, false)
-      // dragBarRef.current.removeEventListener( "mouseout", upEvent, false)
       dragDom.removeEventListener( "mouseenter", enterDragBlockEvent, false)
       dragDom.removeEventListener( "mouseleave", leaveDragBlockEvent, false)
       dragDom.removeEventListener("touchend", upEvent, false)
@@ -157,7 +157,6 @@ export const useHandler = (
     scopeDom.addEventListener("touchmove", moveEvent, { passive: false })
 
     dragDom.addEventListener( "mouseup", upEvent, false)
-    // dragBarRef.current.addEventListener( "mouseout", upEvent, false)
     dragDom.addEventListener( "mouseenter", enterDragBlockEvent, false)
     dragDom.addEventListener( "mouseleave", leaveDragBlockEvent, false)
     dragDom.addEventListener("touchend", upEvent, false)
@@ -168,10 +167,8 @@ export const useHandler = (
 
   const clearData = useCallback<any>(() => {
     resetData()
-    data.thumb = ''
-    data.image = ''
-    data.angle = 0
-  }, [resetData, data])
+    clearCbs && clearCbs()
+  }, [resetData, clearCbs])
 
   const close = useCallback<any>(() => {
     event.close && event.close()

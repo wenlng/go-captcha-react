@@ -93,8 +93,6 @@ interface SlideConfig {
   horizontalPadding?: number;
   showTheme?: boolean;
   title?: string;
-  iconSize?: number;
-  scope ?: boolean;
 }
 
 // data = {}

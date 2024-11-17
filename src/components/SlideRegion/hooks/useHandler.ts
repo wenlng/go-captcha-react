@@ -17,6 +17,7 @@ export const useHandler = (
   rootRef: MutableRefObject<any>,
   containerRef: MutableRefObject<any>,
   tileRef: MutableRefObject<any>,
+  clearCbs: () => void,
 ) => {
   const [thumbPoint, setThumbPoint] = useState<SlideRegionPoint>({x: data.thumbX || 0, y: data.thumbY || 0})
   const [isFreeze, setIsFreeze] = useState<boolean>(false)
@@ -106,7 +107,7 @@ export const useHandler = (
       isMoving = false
       clearEvent()
 
-      if (tileLeft <= 0 || tileTop <= 0) {
+      if (tileLeft < 0 || tileTop < 0) {
         return
       }
 
@@ -144,7 +145,6 @@ export const useHandler = (
       scopeDom.removeEventListener("touchmove", moveEvent, { passive: false })
 
       dragDom.removeEventListener( "mouseup", upEvent, false)
-      // containerRef.current.removeEventListener( "mouseout", upEvent, false)
       dragDom.removeEventListener( "mouseenter", enterDragBlockEvent, false)
       dragDom.removeEventListener( "mouseleave", leaveDragBlockEvent, false)
       dragDom.removeEventListener("touchend", upEvent, false)
@@ -161,7 +161,6 @@ export const useHandler = (
     scopeDom.addEventListener("touchmove", moveEvent, { passive: false })
 
     dragDom.addEventListener( "mouseup", upEvent, false)
-    // containerRef.current.addEventListener( "mouseout", upEvent, false)
     dragDom.addEventListener( "mouseenter", enterDragBlockEvent, false)
     dragDom.addEventListener( "mouseleave", leaveDragBlockEvent, false)
     dragDom.addEventListener("touchend", upEvent, false)
@@ -172,13 +171,8 @@ export const useHandler = (
 
   const clearData = useCallback<any>(() => {
     resetData()
-    data.thumb = ''
-    data.image = ''
-    data.thumbX = 0
-    data.thumbY = 0
-    data.thumbWidth = 0
-    data.thumbHeight = 0
-  }, [resetData, data])
+    clearCbs && clearCbs()
+  }, [resetData, clearCbs])
 
   const close = useCallback<any>(() => {
     event.close && event.close()

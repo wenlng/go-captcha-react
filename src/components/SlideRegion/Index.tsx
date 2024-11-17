@@ -51,7 +51,17 @@ const Index:FC<Props> = forwardRef<SlideRegionRef, Props>((props: Props, ref) =>
   const containerRef = useRef<any>(null)
   const tileRef = useRef<any>(null)
 
-  const handler = useHandler(localData, localEvents, localConfig, rootRef, containerRef, tileRef);
+  const handler = useHandler(
+    localData,
+    localEvents,
+    localConfig,
+    rootRef,
+    containerRef,
+    tileRef,
+    () => {
+      setLocalData({...localData, image: '', thumb: '', thumbX: 0, thumbY: 0, thumbHeight: 0, thumbWidth: 0})
+    }
+  );
 
   const hPadding = localConfig.horizontalPadding || 0
   const vPadding = localConfig.verticalPadding || 0

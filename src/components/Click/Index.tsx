@@ -47,13 +47,15 @@ const Index:FC<Props> = forwardRef<ClickRef, Props>((props: Props, ref) => {
     setLocalEvents({...localEvents, ...(props.events || {})})
   }, [props.events, setLocalEvents])
 
-  const handler = useHandler(localData, localEvents);
+  const handler = useHandler(localData, localEvents, () => {
+    setLocalData({...localData, thumb: '', image: ''})
+  });
 
   const hPadding = localConfig.horizontalPadding || 0
   const vPadding = localConfig.verticalPadding || 0
   const width = (localConfig.width || 0) + ( hPadding * 2) + (localConfig.showTheme ? 2 : 0)
   const hasDisplayWrapperState = (localConfig.width || 0) > 0 || (localConfig.height || 0) > 0
-  const hasDisplayImageState = localData.image != '' && localData.thumb != ''
+  const hasDisplayImageState = localData.image != '' || localData.thumb != ''
 
   useImperativeHandle(ref, () => ({
     reset: handler.resetData,
@@ -140,7 +142,7 @@ const Index:FC<Props> = forwardRef<ClickRef, Props>((props: Props, ref) => {
       </div>
       <div className={styles.buttonBlock}>
         <button
-          className={classnames(!hasDisplayImageState && 'disabled')}
+          className={classnames(!hasDisplayImageState && styles.disabled)}
           onClick={handler.confirmEvent}
         >{localConfig.buttonText}</button>
       </div>

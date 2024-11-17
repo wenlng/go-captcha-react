@@ -10,8 +10,9 @@ import {ClickEvent} from "../meta/event";
 import {getDomXY} from "../../../helper/helper";
 
 export const useHandler = (
-  data: ClickData,
+  _: ClickData,
   event: ClickEvent,
+  clearCbs: () => void,
 ) => {
   const [dots, setDots] = useState<Array<ClickDot>>([])
 
@@ -59,9 +60,8 @@ export const useHandler = (
 
   const clearData = useCallback<any>(() => {
     resetData()
-    data.thumb = ''
-    data.image = ''
-  }, [resetData, data])
+    clearCbs && clearCbs()
+  }, [resetData, clearCbs])
 
   const close = useCallback<any>(() => {
     event.close && event.close()

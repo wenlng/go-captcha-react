@@ -19,6 +19,7 @@ export const useHandler = (
   tileRef: MutableRefObject<any>,
   dragBlockRef: MutableRefObject<any>,
   dragBarRef: MutableRefObject<any>,
+  clearCbs: () => void,
 ) => {
   const [dragLeft, setDragLeft] = useState<number>(0)
   const [thumbLeft, setThumbLeft] = useState<number>(data.thumbX || 0)
@@ -68,7 +69,7 @@ export const useHandler = (
         left = e.clientX - startX
       }
 
-      let ctX = tileOffsetLeft + (left * ratio)
+      const ctX = tileOffsetLeft + (left * ratio)
       if (left >= maxWidth) {
         setDragLeft(maxWidth)
         currentThumbX = maxWidth
@@ -104,7 +105,7 @@ export const useHandler = (
 
       clearEvent()
 
-      if (currentThumbX <= 0) {
+      if (currentThumbX < 0) {
         return
       }
 
@@ -143,7 +144,6 @@ export const useHandler = (
       scopeDom.removeEventListener("touchmove", moveEvent, { passive: false })
 
       dragDom.removeEventListener( "mouseup", upEvent, false)
-      // dragBarRef.current.removeEventListener( "mouseout", upEvent, false)
       dragDom.removeEventListener( "mouseenter", enterDragBlockEvent, false)
       dragDom.removeEventListener( "mouseleave", leaveDragBlockEvent, false)
       dragDom.removeEventListener("touchend", upEvent, false)
@@ -159,7 +159,6 @@ export const useHandler = (
     scopeDom.addEventListener("touchmove", moveEvent, { passive: false })
 
     dragDom.addEventListener( "mouseup", upEvent, false)
-    // dragBarRef.current.addEventListener( "mouseout", upEvent, false)
     dragDom.addEventListener( "mouseenter", enterDragBlockEvent, false)
     dragDom.addEventListener( "mouseleave", leaveDragBlockEvent, false)
     dragDom.addEventListener("touchend", upEvent, false)
@@ -170,13 +169,8 @@ export const useHandler = (
 
   const clearData = useCallback<any>(() => {
     resetData()
-    data.thumb = ''
-    data.image = ''
-    data.thumbX = 0
-    data.thumbY = 0
-    data.thumbWidth = 0
-    data.thumbHeight = 0
-  }, [resetData, data])
+    clearCbs && clearCbs()
+  }, [resetData, clearCbs])
 
   const close = useCallback<any>(() => {
     event.close && event.close()
