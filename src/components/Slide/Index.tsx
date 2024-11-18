@@ -82,7 +82,12 @@ const Index:FC<Props> = forwardRef<SlideRef, Props>((props: Props, ref) => {
   }));
 
   useEffect(() => {
-    dragBlockRef.current.addEventListener('dragstart', (event: any) => event.preventDefault());
+    const fn = (event: any) => event.preventDefault()
+    dragBlockRef.current && dragBlockRef.current.addEventListener('dragstart', fn);
+
+    return () => {
+      dragBlockRef.current && dragBlockRef.current.removeEventListener('dragstart', fn);
+    }
   }, [dragBlockRef]);
 
   return <div

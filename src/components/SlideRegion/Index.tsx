@@ -77,7 +77,12 @@ const Index:FC<Props> = forwardRef<SlideRegionRef, Props>((props: Props, ref) =>
   }));
 
   useEffect(() => {
-    tileRef.current.addEventListener('dragstart', (event: any) => event.preventDefault());
+    const fn = (event: any) => event.preventDefault()
+    tileRef.current && tileRef.current.addEventListener('dragstart', fn);
+
+    return () => {
+      tileRef.current && tileRef.current.removeEventListener('dragstart', fn);
+    }
   }, [tileRef]);
 
   return <div
