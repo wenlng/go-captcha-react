@@ -1,6 +1,7 @@
 import 'react-app-polyfill/ie11';
 import * as React from 'react';
-import {createRoot} from "react-dom/client";
+// import {createRoot} from "react-dom/client";
+import * as ReactDOM from 'react-dom';
 import GoCaptcha from '../.';
 // import GoCaptcha from '../src';
 import {useEffect, useRef, useState} from "react";
@@ -255,5 +256,6 @@ const App = () => {
 };
 
 const rootElement: any = document.getElementById('root');
-const root = createRoot(rootElement);
-root.render(<App/>);
+// const root = createRoot(rootElement);
+// root.render(<App/>);
+ReactDOM.render(<App />, rootElement);

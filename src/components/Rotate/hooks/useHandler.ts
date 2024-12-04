@@ -35,6 +35,10 @@ export const useHandler = (
   }, [data.angle, setDragLeft, setThumbAngle])
 
   const dragEvent = useCallback<any>((e: Event|any) => {
+    if (!checkTargetFather(dragBarRef.current, e)) {
+      return
+    }
+
     const touch = e.touches && e.touches[0];
 
     const offsetLeft = dragBlockRef.current.offsetLeft
@@ -97,12 +101,13 @@ export const useHandler = (
         return
       }
 
+      clearEvent()
+
       if (!isMoving) {
         return
       }
 
       isMoving = false
-      clearEvent()
 
       if (currentAngle < 0) {
         return
