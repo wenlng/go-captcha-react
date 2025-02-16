@@ -67,7 +67,7 @@ const Index:FC<Props> = forwardRef<SlideRegionRef, Props>((props: Props, ref) =>
   const vPadding = localConfig.verticalPadding || 0
   const width = (localConfig.width || 0) + ( hPadding * 2) + (localConfig.showTheme ? 2 : 0)
   const hasDisplayWrapperState = (localConfig.width || 0) > 0 || (localConfig.height || 0) > 0
-  const hasDisplayImageState = localData.image != '' && localData.thumb != ''
+  const hasDisplayImageState = (localData.image && localData.image.length > 0) && (localData.thumb && localData.thumb.length > 0)
 
   useImperativeHandle(ref, () => ({
     reset: handler.resetData,

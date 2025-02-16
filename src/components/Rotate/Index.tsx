@@ -69,7 +69,7 @@ const Index:FC<Props> = forwardRef<RotateRef, Props>((props: Props, ref) => {
   const width = (localConfig.width || 0) + ( hPadding * 2) + (localConfig.showTheme ? 2 : 0)
   const size = (localConfig.size || 0) > 0 ? localConfig.size : defaultConfig().size
   const hasDisplayWrapperState = (localConfig.width || 0) > 0 || (localConfig.height || 0) > 0
-  const hasDisplayImageState = localData.image != '' && localData.thumb != ''
+  const hasDisplayImageState = (localData.image && localData.image.length > 0) && (localData.thumb && localData.thumb.length > 0)
 
   useImperativeHandle(ref, () => ({
     reset: handler.resetData,
@@ -145,7 +145,13 @@ const Index:FC<Props> = forwardRef<RotateRef, Props>((props: Props, ref) => {
         <div className={cstyles.thumb}>
           <div
             className={cstyles.thumbBlock}
-            style={{ transform: `rotate(${handler.getState().thumbAngle}deg)`}}
+            style={{
+              transform: `rotate(${handler.getState().thumbAngle}deg)`,
+              ...(localData.thumbSize > 0 ? {
+                width: localData.thumbSize + "px",
+                height: localData.thumbSize + "px"
+              } : {})
+            }}
           >
             <img
               className={localData.thumb == '' ? styles.hide : ''}

@@ -5,9 +5,13 @@ import * as ReactDOM from 'react-dom';
 import GoCaptcha from '../.';
 // import GoCaptcha from '../src';
 import {useEffect, useRef, useState} from "react";
+// @ts-ignore
 import {ClickRef} from "../dist/components/Click";
+// @ts-ignore
 import {SlideRef} from "../dist/components/Slide";
+// @ts-ignore
 import {SlideRegionRef} from "../src/components/SlideRegion";
+// @ts-ignore
 import {RotateRef} from "../src/components/Rotate";
 
 const App = () => {
@@ -114,9 +118,9 @@ const App = () => {
   ///////////////////////////////////
 
   const [rotateData, setRotateData] = useState({
-    angle: 20,
     image: rotateImage,
     thumb: rotateThumb,
+    thumbSize: 195
   })
 
   const [rotateConfig, setRotateConfig] = useState({
