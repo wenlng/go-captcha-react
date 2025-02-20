@@ -1,7 +1,13 @@
 <div align="center">
-<img width="120" style="padding-top: 50px; margin: 0;" src="http://47.104.180.148/go-captcha/gocaptcha_logo.svg?v=1"/>
+<img width="120" style="padding-top: 50px; margin: 0;" src="https://github.com/wenlng/git-assets/blob/master/go-captcha/gocaptcha_logo.svg?raw=true"/>
 <h1 style="margin: 0; padding: 0">Go Captcha</h1>
 <p>Behavior Captcha Of React</p>
+
+<a href="https://github.com/wenlng/go-captcha-react/releases"><img src="https://img.shields.io/github/v/release/wenlng/go-captcha-react.svg"/></a>
+<a href="https://www.npmjs.com/package/go-captcha-react"><img src="https://img.shields.io/npm/v/go-captcha-react"/></a>
+<a href="https://github.com/wenlng/go-captcha-react/blob/LICENSE"><img src="https://img.shields.io/badge/License-MIT-green.svg"/></a>
+<a href="https://github.com/wenlng/go-captcha-react"><img src="https://img.shields.io/github/stars/wenlng/go-captcha-react.svg"/></a>
+<a href="https://github.com/wenlng/go-captcha-react"><img src="https://img.shields.io/github/last-commit/wenlng/go-captcha-react.svg"/></a>
 
 </div>
 
@@ -13,7 +19,7 @@
 
 <p> ⭐️ If it helps you, please give a star.</p>
 
-<img src="http://47.104.180.148/go-captcha/go-captcha-v2.jpg" alt="Poster">
+<img src="https://github.com/wenlng/git-assets/blob/master/go-captcha/go-captcha-v2.jpg?raw=true" alt="Poster">
 
 
 ## Install

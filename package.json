@@ -1,11 +1,11 @@
 {
   "name": "go-captcha-react",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "license": "MIT",
   "private": false,
   "email": "wengaolng@gmail.com",
   "author": "Awen <wengaolng@gmail.com>",
-  "description": "GoCaptcha for React, which implements click mode, slider mode, drag-drop mode and rotation mode.",
+  "description": "GoCaptcha of React, which implements click mode, slider mode, drag-drop mode and rotation mode.",
   "keywords": [
     "go-capta-react",
     "go-captcha",
