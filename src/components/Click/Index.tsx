@@ -77,16 +77,16 @@ const Index:FC<Props> = forwardRef<ClickRef, Props>((props: Props, ref) => {
   >
     <div className={styles.header}>
       <span>{localConfig.title}</span>
-      <img
-        className={localData.thumb == '' ? styles.hide : ''}
-        style={{
-          width: localConfig.thumbWidth + "px",
-          height: localConfig.thumbHeight + "px",
-          display: hasDisplayImageState ? 'block' : 'none'
-        }}
-        src={localData.thumb}
-        alt=""
-      />
+      {hasDisplayImageState && (
+        <img
+          style={{
+            width: localConfig.thumbWidth + "px",
+            height: localConfig.thumbHeight + "px"
+          }}
+          src={localData.thumb}
+          alt=""
+        />
+      )}
     </div>
     <div
       className={styles.body}
@@ -98,17 +98,18 @@ const Index:FC<Props> = forwardRef<ClickRef, Props>((props: Props, ref) => {
       <div className={styles.loading}>
         <LoadingIcon />
       </div>
-      <img
-        className={classnames(styles.picture, localData.image == '' ? styles.hide : '')}
-        style={{
-          width: localConfig.width + "px",
-          height: localConfig.height + "px",
-          display: hasDisplayImageState ? 'block' : 'none'
-        }}
-        src={localData.image}
-        alt=""
-        onClick={handler.clickEvent}
-      />
+      {hasDisplayImageState && (
+        <img
+          className={styles.picture}
+          style={{
+            width: localConfig.width + "px",
+            height: localConfig.height + "px"
+          }}
+          src={localData.image}
+          alt=""
+          onClick={handler.clickEvent}
+        />
+      )}
       <div className={cstyles.dots}>
         {
           handler.getDots().map((dot: ClickDot) => {

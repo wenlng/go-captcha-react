@@ -108,16 +108,17 @@ const Index:FC<Props> = forwardRef<SlideRegionRef, Props>((props: Props, ref) =>
       <div className={styles.loading}>
         <LoadingIcon />
       </div>
-      <img
-        className={classnames(styles.picture, localData.image == '' ? styles.hide : '')}
-        src={localData.image}
-        style={{
-          width: localConfig.width + "px",
-          height: localConfig.height + "px",
-          display: hasDisplayImageState ? 'block' : 'none'
-        }}
-        alt=""
-      />
+      {hasDisplayImageState && (
+        <img
+          className={styles.picture}
+          src={localData.image}
+          style={{
+            width: localConfig.width + "px",
+            height: localConfig.height + "px"
+          }}
+          alt=""
+        />
+      )}
       <div
         className={cstyles.tile}
         ref={tileRef}
@@ -129,12 +130,13 @@ const Index:FC<Props> = forwardRef<SlideRegionRef, Props>((props: Props, ref) =>
         }}
         onMouseDown={handler.dragEvent}
         onTouchStart={handler.dragEvent} >
-        <img
-          className={localData.thumb == '' ? styles.hide : ''}
-          style={{ display: hasDisplayImageState ? 'block' : 'none' }}
-          src={localData.thumb}
-          alt=""
-        />
+        {hasDisplayImageState && (
+          <img
+            style={{}}
+            src={localData.thumb}
+            alt=""
+          />
+        )}
       </div>
     </div>
     <div className={styles.footer}>

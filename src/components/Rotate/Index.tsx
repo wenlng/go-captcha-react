@@ -133,12 +133,12 @@ const Index:FC<Props> = forwardRef<RotateRef, Props>((props: Props, ref) => {
             height: localConfig.size + 'px'
           }}
         >
-          <img
-            className={localData.image == '' ? styles.hide : ''}
-            src={localData.image}
-            style={{display: hasDisplayImageState ? 'block' : 'none' }}
-            alt=""
-          />
+          {hasDisplayImageState && (
+            <img
+              src={localData.image}
+              alt=""
+            />
+          )}
           <div className={cstyles.round} />
         </div>
 
@@ -153,12 +153,12 @@ const Index:FC<Props> = forwardRef<RotateRef, Props>((props: Props, ref) => {
               } : {})
             }}
           >
-            <img
-              className={localData.thumb == '' ? styles.hide : ''}
-              src={localData.thumb}
-              style={{visibility: hasDisplayImageState ? 'visible' : 'hidden' }}
-              alt=""
-            />
+            {hasDisplayImageState && (
+              <img
+                src={localData.thumb}
+                alt=""
+              />
+            )}
           </div>
         </div>
       </div>
